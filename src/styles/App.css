@@ -5,69 +5,83 @@
 .Game {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: 100vw;
-      grid-template-columns: 100vw;
-      grid-template-areas: "animatedBg" "animatedBg";
+      grid-template-areas: "canvas-plus-board" "canvas-plus-board";
 }
 
-.animatedBg {
+.canvas {
   -ms-grid-row: 1;
   -ms-grid-row-span: 2;
   -ms-grid-column: 1;
-  grid-area: animatedBg;
+  grid-area: canvas-plus-board;
   z-index: 1;
+}
+
+.canvas .particle-canvas {
+  width: 100vw !important;
+  height: 100vh !important;
 }
 
 .board {
   -ms-grid-row: 1;
   -ms-grid-row-span: 2;
   -ms-grid-column: 1;
-  grid-area: animatedBg;
+  grid-area: canvas-plus-board;
   z-index: 2;
 }
 
 .bingoGame {
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 20vh 1fr;
-      grid-template-rows: 20vh 1fr;
-      grid-template-areas: "information" "grid&Answer";
+  -ms-grid-rows: 25vh 1fr;
+      grid-template-rows: 25vh 1fr;
+      grid-template-areas: "bingoResult" "bingoGrid";
 }
 
-.output {
-  grid-area: "grid&Answer";
+.bingoResult {
+  grid-area: "bingoResult";
   display: -ms-grid;
   display: grid;
+      grid-template-areas: "noBlend-and-Blend";
   -ms-grid-column-align: center;
       justify-self: center;
   -ms-grid-row-align: center;
       align-self: center;
   pointer-events: none;
-  width: 100vw;
-  height: 100%;
 }
 
-.output .gameSuccess {
-  grid-area: "information";
-  display: "grid";
+.bingoResult .noBlends {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: noBlend-and-Blend;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  color: white;
+  font-family: "Trebuchet MS";
+}
+
+.bingoResult .matchedBlends {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: noBlend-and-Blend;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 10vh 10vh;
+      grid-template-rows: 10vh 10vh;
+      grid-template-areas: "text" "icon";
   -ms-grid-column-align: center;
       justify-self: center;
   -ms-grid-row-align: center;
       align-self: center;
 }
 
-.output .gameSuccess .trophy {
-  z-index: 1;
-  background-color: #fff;
-  height: 50%;
-  width: 50%;
-  border-radius: 100%;
-  -webkit-animation: trophy 0.5s 1 forwards;
-          animation: trophy 0.5s 1 forwards;
-}
-
-.output .gameSuccess .action {
-  position: absolute;
+.bingoResult .matchedBlends .action {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: icon;
+  top: 150vh;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   max-height: 300px;
@@ -76,7 +90,7 @@
   width: 25vw;
 }
 
-.output .gameSuccess .action .confetti, .output .gameSuccess .action .confetti--purple {
+.bingoResult .matchedBlends .action .confetti, .bingoResult .matchedBlends .action .confetti--purple {
   z-index: -1;
   position: absolute;
   height: 50px;
@@ -93,7 +107,7 @@
   opacity: 0;
 }
 
-.output .gameSuccess .action .confetti {
+.bingoResult .matchedBlends .action .confetti {
   top: 0;
   left: calc(50% - 5px);
   background-color: #ffea00;
@@ -103,14 +117,14 @@
           animation-delay: 0.35s;
 }
 
-.output .gameSuccess .action .confetti.two {
+.bingoResult .matchedBlends .action .confetti.two {
   top: auto;
   bottom: 0;
   -webkit-animation-name: fly--down;
           animation-name: fly--down;
 }
 
-.output .gameSuccess .action .confetti.three, .output .gameSuccess .action .confetti.four {
+.bingoResult .matchedBlends .action .confetti.three, .bingoResult .matchedBlends .action .confetti.four {
   top: calc(50% - 5px);
   left: calc(50% - 25px);
   height: 10px;
@@ -119,12 +133,12 @@
           animation-name: fly--left;
 }
 
-.output .gameSuccess .action .confetti.four {
+.bingoResult .matchedBlends .action .confetti.four {
   -webkit-animation-name: fly--right;
           animation-name: fly--right;
 }
 
-.output .gameSuccess .action .confetti--purple {
+.bingoResult .matchedBlends .action .confetti--purple {
   background-color: #6200ea;
   -webkit-animation-name: fly--up--left;
           animation-name: fly--up--left;
@@ -136,7 +150,7 @@
   top: 20%;
 }
 
-.output .gameSuccess .action .confetti--purple.two {
+.bingoResult .matchedBlends .action .confetti--purple.two {
   -webkit-animation-name: fly--up--right;
           animation-name: fly--up--right;
   left: auto;
@@ -145,7 +159,7 @@
           transform: rotate(45deg);
 }
 
-.output .gameSuccess .action .confetti--purple.three {
+.bingoResult .matchedBlends .action .confetti--purple.three {
   top: auto;
   bottom: 20%;
   -webkit-transform: rotate(45deg);
@@ -154,7 +168,7 @@
           animation-name: fly--down--left;
 }
 
-.output .gameSuccess .action .confetti--purple.four {
+.bingoResult .matchedBlends .action .confetti--purple.four {
   top: auto;
   bottom: 20%;
   left: auto;
@@ -163,6 +177,16 @@
           transform: rotate(135deg);
   -webkit-animation-name: fly--down--right;
           animation-name: fly--down--right;
+}
+
+.bingoResult .matchedBlends .trophy {
+  z-index: 1;
+  background-color: #fff;
+  height: 50%;
+  width: 50%;
+  border-radius: 100%;
+  -webkit-animation: trophy 0.5s 1 forwards;
+          animation: trophy 0.5s 1 forwards;
 }
 
 @-webkit-keyframes trophy {
@@ -485,17 +509,8 @@
   }
 }
 
-.output .gameFail {
-  grid-area: "information";
-  -ms-grid-column-align: center;
-      justify-self: center;
-  -ms-flex-item-align: center;
-      -ms-grid-row-align: center;
-      align-self: center;
-}
-
 .bingoGrid {
-  grid-area: "grid&Answer";
+  grid-area: "bingoGrid";
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (100px)[5];

@@ -4,57 +4,65 @@
 
 .Game {
     display: grid;
-
-    grid-template-columns: 100vw;
     grid-template-areas:
-        "animatedBg"
-        "animatedBg";
+        "canvas-plus-board"
+        "canvas-plus-board";
 }
 
-.animatedBg {
-    grid-area: animatedBg;
+// animated background
+.canvas {
+    grid-area: canvas-plus-board;
     z-index: 1;
+    .particle-canvas {
+        width: 100vw !important;
+        height: 100vh !important;
+    }
 }
 
+// game table set;
 .board {
-    grid-area: animatedBg;
+    grid-area: canvas-plus-board;
     z-index: 2;
 }
 
 .bingoGame {
     display: grid;
-    grid-template-rows: 20vh 1fr;
+    grid-template-rows: 25vh 1fr;
     grid-template-areas:
-        "information"
-        "grid&Answer";
+        "bingoResult"
+        "bingoGrid";
 }
-.output {
-    grid-area: "grid&Answer";
+.bingoResult {
+    grid-area: "bingoResult";
     display: grid;
+    grid-template-areas: "noBlend-and-Blend";
     justify-self: center;
     align-self: center;
     pointer-events: none;
-    width: 100vw;
-    height: 100%;
+    // width: 100vw;
+    // height: 100%;
 
-    .gameSuccess {
-        grid-area: "information";
-        display: "grid";
+    .noBlends {
+        grid-area: noBlend-and-Blend;
         justify-self: center;
         align-self: center;
-        .trophy {
-            z-index: 1;
-            background-color: #fff;
-            height: 50%;
-            width: 50%;
-            border-radius: 100%;
-            animation: trophy 0.5s 1 forwards;
-        }
+        color: white;
+        font-family: "Trebuchet MS";
+    }
+    .matchedBlends {
+        grid-area: noBlend-and-Blend;
+        display: grid;
+        grid-template-rows: 10vh 10vh;
+        grid-template-areas:
+            "text"
+            "icon";
 
+        justify-self: center;
+        align-self: center;
         .action {
-            position: absolute;
-            // top: 50vh;
-            // left: 50vw;
+            grid-area: icon;
+            top: 150vh;
+
             transform: translate(-50%, -50%);
             max-height: 300px;
             height: 25vw;
@@ -125,6 +133,14 @@
                     }
                 }
             }
+        }
+        .trophy {
+            z-index: 1;
+            background-color: #fff;
+            height: 50%;
+            width: 50%;
+            border-radius: 100%;
+            animation: trophy 0.5s 1 forwards;
         }
 
         @keyframes trophy {
@@ -265,16 +281,10 @@
             }
         }
     }
-
-    .gameFail {
-        grid-area: "information";
-        justify-self: center;
-        align-self: center;
-    }
 }
 
 .bingoGrid {
-    grid-area: "grid&Answer";
+    grid-area: "bingoGrid";
     display: grid;
     grid-template-columns: repeat(5, 100px);
     grid-template-rows: repeat(5, 100px);

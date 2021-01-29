@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 const Success = (props) => {
 
 	const {count} = props;
-	return ( <section class="gameSuccess">
+	return ( <section class="matchedBlends">
 	<div class="action">
 
 	<div class="trophy">
@@ -23,11 +23,11 @@ const Success = (props) => {
 	
 
 </div>
-<p style={
+<div className="animatedText anim-typewriter" style={
 	{fontSize: 40, 
 	color: "white",
 	fontFamily: 'Trebuchet MS'
-	}}> Hey, Astronaut, <br/> Orbiting {count}  times !!! {String.fromCodePoint(127769)}</p>
+	}}> <h1> Hey, Astronaut,  </h1>  <h2> Orbiting {count}  times !!! {String.fromCodePoint(127769)} </h2></div>
 </section>  );
 }
  

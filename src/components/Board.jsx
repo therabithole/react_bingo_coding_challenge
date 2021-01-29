@@ -21,19 +21,20 @@ activeCellsId: []
 
 componentDidMount() {
 
-    let shuffledList = _.shuffle(getCells().map(cell=> cell.name));
+    let exclude = getCells().filter(cell=> cell.id !== 13)
+    let shuffledList = _.shuffle(exclude.map(cell=> cell.name));
 
     let cellsCopy = getCells()
 
-    for (let i = 0; i <1; i++) {
+    for (let i = 1; i <24; i++) {
 
-        if (cellsCopy[i].id === 13 ) return
+        if (cellsCopy[i].id === 13) continue;
         cellsCopy[i].name = shuffledList[i]
         
     }
 
 
-this.setState({cells: cellsCopy}, console.log(this.state.cells))
+this.setState({cells: cellsCopy})
 
 
 
@@ -92,12 +93,9 @@ return (
     <section className="board">
    
 <section className="bingoGame">
-<section className="output"> 
-
- {matchedBlends.length >= 1 ? <Success count={count}/> :
- <section 
- className="gameFail" 
- style={{color: "white"}}>
+<section className="bingoResult"> 
+ {/* result on success */}
+ {matchedBlends.length >= 1 ? <Success count={count}/> : <section className="noBlends">
      <div style={{fontSize: 50, fontFamily: 'Trebuchet MS'}}> Space Call: 0 {String.fromCodePoint(127766)}</div>
        </section>}
 </section>

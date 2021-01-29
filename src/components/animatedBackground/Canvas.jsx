@@ -4,6 +4,7 @@ import "../../styles/App.css"
 
 class Canvas extends Component {
   state = { width: "0px", height: "0px" };
+
   componentDidMount() {
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWindowDimensions);
@@ -13,15 +14,15 @@ class Canvas extends Component {
   }
   updateWindowDimensions = () => {
     this.setState({
-      width: `${window.innerWidth}px`,
-      height: `${window.innerHeight}px`
+      width: `${window.innerWidth - 10}px`,
+      height: `${window.innerHeight - 5}px`
     });
   };
   render() {
     const { width, height } = this.state;
     console.log(width, height);
     return (
-        <section className='animatedBg' >
+        <section className='canvas' >
       <Particles id="particle-canvas"
         {...this.state}
         params={{
