@@ -7,8 +7,7 @@
   display: grid;
   -ms-grid-columns: 100vw;
       grid-template-columns: 100vw;
-      grid-template-areas: "animatedBg"
- "animatedBg";
+      grid-template-areas: "animatedBg" "animatedBg";
 }
 
 .animatedBg {
@@ -32,8 +31,7 @@
   display: grid;
   -ms-grid-rows: 20vh 1fr;
       grid-template-rows: 20vh 1fr;
-      grid-template-areas: "information"
- "grid&Answer";
+      grid-template-areas: "information" "grid&Answer";
 }
 
 .output {
@@ -70,8 +68,6 @@
 
 .output .gameSuccess .action {
   position: absolute;
-  top: 50vh;
-  left: 50vw;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
   max-height: 300px;
@@ -524,7 +520,7 @@ button {
   color: yellow;
   outline: none;
   font-weight: 500;
-  font-family: 'Trebuchet MS', sans-serif;
+  font-family: "Trebuchet MS", sans-serif;
 }
 
 button:hover {

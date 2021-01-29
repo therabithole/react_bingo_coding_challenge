@@ -1,19 +1,19 @@
 .App {
-    background-color:black;
+    background-color: black;
 }
 
 .Game {
     display: grid;
-  
-    grid-template-columns: 100vw; 
+
+    grid-template-columns: 100vw;
     grid-template-areas:
-    "animatedBg"
-    "animatedBg";
+        "animatedBg"
+        "animatedBg";
 }
 
 .animatedBg {
     grid-area: animatedBg;
-   z-index: 1;
+    z-index: 1;
 }
 
 .board {
@@ -38,8 +38,7 @@
     height: 100%;
 
     .gameSuccess {
-    
-    grid-area:"information";
+        grid-area: "information";
         display: "grid";
         justify-self: center;
         align-self: center;
@@ -54,8 +53,8 @@
 
         .action {
             position: absolute;
-            top: 50vh;
-            left: 50vw;
+            // top: 50vh;
+            // left: 50vw;
             transform: translate(-50%, -50%);
             max-height: 300px;
             height: 25vw;
@@ -268,19 +267,18 @@
     }
 
     .gameFail {
-        grid-area:"information";
+        grid-area: "information";
         justify-self: center;
         align-self: center;
     }
 }
 
 .bingoGrid {
-
     grid-area: "grid&Answer";
     display: grid;
     grid-template-columns: repeat(5, 100px);
     grid-template-rows: repeat(5, 100px);
-   
+
     width: fit-content;
     justify-self: center;
     align-self: center;
@@ -291,15 +289,13 @@ button {
     border: none;
     appearance: none;
     color: yellow;
-    outline:none;
+    outline: none;
     font-weight: 500;
-    font-family: 'Trebuchet MS', sans-serif;
-
+    font-family: "Trebuchet MS", sans-serif;
 }
 
 button:hover {
     color: white;
-   
 }
 
 .highlighted {
@@ -309,7 +305,6 @@ button:hover {
 
 .nonHighlighted {
     text-decoration: none;
- 
 }
 
 button:disabled {
@@ -317,12 +312,6 @@ button:disabled {
     color: black;
 }
 
-
 button.highlighted:disabled {
     text-decoration: none;
- 
-
 }
-
-
-

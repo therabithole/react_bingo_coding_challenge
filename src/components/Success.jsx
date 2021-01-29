@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 
 
-const Success = () => {
+const Success = (props) => {
+
+	const {count} = props;
 	return ( <section class="gameSuccess">
 	<div class="action">
 
@@ -25,7 +27,7 @@ const Success = () => {
 	{fontSize: 40, 
 	color: "white",
 	fontFamily: 'Trebuchet MS'
-	}}> Hey, Astronaut!!!  {String.fromCodePoint(127769)}</p>
+	}}> Hey, Astronaut, <br/> Orbiting {count}  times !!! {String.fromCodePoint(127769)}</p>
 </section>  );
 }
  

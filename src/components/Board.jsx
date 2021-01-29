@@ -1,25 +1,52 @@
 import React, { Component } from 'react';
 import Cell from "./Cell";
 import {getCells} from "../services/Cells.js";
+import _ from 'lodash' 
 import "../styles/App.css";
 
+
 import Success from './Success';
+
 
 class Board extends Component {
 
 state = {
-bingo: false,
+matchedBlends: [],
+blendLength: 0,
 cells: [],
 activeCells: [],
 activeCellsId: []
 
 };
+
 componentDidMount() {
-this.setState({cells: getCells()})
+
+    let shuffledList = _.shuffle(getCells().map(cell=> cell.name));
+
+    let cellsCopy = getCells()
+
+    for (let i = 0; i <1; i++) {
+
+        if (cellsCopy[i].id === 13 ) return
+        cellsCopy[i].name = shuffledList[i]
+        
+    }
+
+
+this.setState({cells: cellsCopy}, console.log(this.state.cells))
+
+
+
 }
+
+
+
 HandleClick = (cell) => {
+    
+
 cell.active = !cell.active
 this.setState({ cell: cell});
+
 let activeCells = this.state.cells.filter((cell)=> cell.active == true)
 
 this.setState({ activeCells: activeCells})
@@ -28,7 +55,7 @@ let activeCellsId = activeCells.map(activeCells => activeCells.id)
  
 this.setState({activeCellsId: activeCellsId});
 
-let lines = [[1, 2, 3 ,4, 5],
+let winningBlends = [[1, 2, 3 ,4, 5],
 [6, 7, 8, 9, 10],
 [11, 12,13, 14, 15],
 [16, 17, 18, 19, 20],
@@ -40,30 +67,38 @@ let lines = [[1, 2, 3 ,4, 5],
 [5, 10, 15, 20, 25],
 [1, 7, 13, 19, 25],
 [5, 9, 13, 17, 21]];
-let winner = false;
-let winCheck = (activeCellsId, lines) =>
-lines.some((line) =>
-line.every(element => activeCellsId.includes(element)));
-let mybingo = winCheck(activeCellsId, lines);
 
-this.setState({bingo: mybingo})
-// return console.log(this.state.activeCellsId)
+
+let matched = (activeCellsId, winningBlends) =>
+winningBlends.filter((winningBlend) =>
+winningBlend.every(l =>
+ activeCellsId.includes(l)));
+
+let matchedBlends = matched(activeCellsId, winningBlends);
+console.log(matchedBlends)
+this.setState({matchedBlends: matchedBlends })
+
 
 }
 
+
 render() {
 const {cells } = this.state;
+const {matchedBlends} = this.state;
+const {length: count} = matchedBlends;
+
 
 return (
     <section className="board">
+   
 <section className="bingoGame">
 <section className="output"> 
 
- {this.state.bingo === true ? <Success/> : 
+ {matchedBlends.length >= 1 ? <Success count={count}/> :
  <section 
  className="gameFail" 
  style={{color: "white"}}>
-     <div style={{fontSize: 50, fontFamily: 'Trebuchet MS'}}> Space Call {String.fromCodePoint(127766)}</div>
+     <div style={{fontSize: 50, fontFamily: 'Trebuchet MS'}}> Space Call: 0 {String.fromCodePoint(127766)}</div>
        </section>}
 </section>
 

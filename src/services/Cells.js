@@ -1,3 +1,6 @@
+import _ from 'lodash/shuffle';
+
+
 const cells = [
     {id: 1, name: "(child noises in the background!)", active: false},
     {id: 2, name: "hello, hello?", active: false},
@@ -26,10 +29,13 @@ const cells = [
     {id: 25, name: "can you repeat please?", active: false},
 
 
-
 ]
 
-export function getCells (){
+
+
+ export function getCells (){
 
     return cells.filter(cell => cell)
 }
+
+
