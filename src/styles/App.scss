@@ -36,6 +36,8 @@
     grid-area: "bingoResult";
     display: grid;
     grid-template-areas: "noBlend-and-Blend";
+    grid-template-rows: 25vh;
+
     justify-self: center;
     align-self: center;
     pointer-events: none;
@@ -48,26 +50,39 @@
         align-self: center;
         color: white;
         font-family: "Trebuchet MS";
+        border: 2px solid green;
     }
     .matchedBlends {
-        grid-area: noBlend-and-Blend;
-        display: grid;
-        grid-template-rows: 10vh 10vh;
-        grid-template-areas:
-            "text"
-            "icon";
-
         justify-self: center;
         align-self: center;
-        .action {
-            grid-area: icon;
-            top: 150vh;
+        grid-area: noBlend-and-Blend;
+        display: grid;
+        border: 2px solid green;
+        grid-template-rows: 40% 50%;
+        grid-row-gap: 10%;
+        grid-template-areas:
+            "textArea"
+            "iconArea";
 
+        .animatedText {
+            grid-area: textArea;
+            font-size: 2.8vh;
+            color: white;
+            font-family: "Trebuchet MS";
+        }
+        .action {
+            grid-area: iconArea;
+
+            justify-self: center;
+            align-self: center;
             transform: translate(-50%, -50%);
-            max-height: 300px;
-            height: 25vw;
-            max-width: 300px;
-            width: 25vw;
+            max-height: 10vh;
+            min-height: 7vh;
+            height: 10vw;
+            max-width: 10vh;
+            min-width: 7vh;
+
+            width: 10vw;
             %confetti {
                 z-index: -1;
                 position: absolute;
@@ -136,9 +151,10 @@
         }
         .trophy {
             z-index: 1;
+
             background-color: #fff;
-            height: 50%;
-            width: 50%;
+            height: 100%;
+            width: 100%;
             border-radius: 100%;
             animation: trophy 0.5s 1 forwards;
         }
