@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Cell from "./Cell";
 import {getCells} from "../services/Cells.js";
-import _ from 'lodash' 
+import _, { update } from 'lodash' 
 import "../styles/App.css";
 
 
@@ -21,24 +21,35 @@ activeCellsId: []
 
 componentDidMount() {
 
-    let exclude = getCells().filter(cell=> cell.id !== 13)
-    let shuffledList = _.shuffle(exclude.map(cell=> cell.name));
+    console.log(getCells())
+   let ArrayMinusMid = getCells().filter(cell=> cell.id !== 13);
 
-    let cellsCopy = getCells()
+   let head = ArrayMinusMid.slice(0, 12);
+   let tail = ArrayMinusMid.slice(12, 24)
 
-    for (let i = 1; i <24; i++) {
+   let shuffleNames = _.shuffle(ArrayMinusMid.map(cell=> cell.name));
+   
+   let shuffledHead = shuffleNames.slice(0, 12)
+   let shuffledTail = shuffleNames.slice(12, 24)
 
-        if (cellsCopy[i].id === 13) continue;
-        cellsCopy[i].name = shuffledList[i]
-        
+   let insertSoccer = [`CONF CALL ${String.fromCodePoint(9917)}`]
+ 
+   let Shuffled = [...shuffledHead, ...insertSoccer, ...shuffledTail]
+
+
+   let ShuffledArray = Shuffled.map((shuff, index) => {
+   
+    return {id: index+1, name: shuff};
+    });
+
+ console.log(ShuffledArray)
+   
+ 
+
+
+this.setState({cells: ShuffledArray})
+     
     }
-
-
-this.setState({cells: cellsCopy})
-
-
-
-}
 
 
 
