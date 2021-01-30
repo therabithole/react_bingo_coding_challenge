@@ -21,40 +21,25 @@ activeCellsId: []
 
 componentDidMount() {
 
-    console.log(getCells())
    let ArrayMinusMid = getCells().filter(cell=> cell.id !== 13);
-
-   let head = ArrayMinusMid.slice(0, 12);
-   let tail = ArrayMinusMid.slice(12, 24)
-
    let shuffleNames = _.shuffle(ArrayMinusMid.map(cell=> cell.name));
-   
-   let shuffledHead = shuffleNames.slice(0, 12)
-   let shuffledTail = shuffleNames.slice(12, 24)
 
-   let insertSoccer = [`CONF CALL ${String.fromCodePoint(9917)}`]
- 
-   let Shuffled = [...shuffledHead, ...insertSoccer, ...shuffledTail]
+   let cellsCopy = getCells();
+   shuffleNames.splice(12, 0, `CONF CALL ${String.fromCodePoint(9917)}`)
+    for (let i = 0; i < 25; i++ ) { 
+            if (cellsCopy[i].id === 13) continue;
+            cellsCopy[i].name = shuffleNames[i]
+        }  
 
+this.setState({cells: cellsCopy})
 
-   let ShuffledArray = Shuffled.map((shuff, index) => {
-   
-    return {id: index+1, name: shuff};
-    });
-
- console.log(ShuffledArray)
-   
- 
-
-
-this.setState({cells: ShuffledArray})
      
     }
 
 
 
 HandleClick = (cell) => {
-    
+    console.log("onclick", this.state.cells)
 
 cell.active = !cell.active
 this.setState({ cell: cell});

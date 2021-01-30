@@ -20,7 +20,7 @@ class Canvas extends Component {
   };
   render() {
     const { width, height } = this.state;
-    console.log(width, height);
+
     return (
         <section className='canvas' >
       <Particles id="particle-canvas"
