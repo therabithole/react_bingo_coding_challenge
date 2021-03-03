@@ -23,7 +23,10 @@ const Success = (props) => {
 	
 
 </div>
-<div className="animatedText anim-typewriter"> <h2> Hey, Astronaut,  <br/> Orbiting {count}  times !!! {String.fromCodePoint(127769)}  </h2></div>
+<div className="animatedText anim-typewriter"> <h2> Hey, Astronaut,  
+{/*  <br/> Orbiting {count}  times !!!*/} 
+ <br/>
+{String.fromCodePoint(127769)}  </h2></div>
 </section>  );
 }
  

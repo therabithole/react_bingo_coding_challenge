@@ -1,19 +1,14 @@
-import React, { Component } from 'react';
-import Board from './Board';
+import React from 'react';
+import BoardHooks from './BoardHooks';
 import Canvas from "./animatedBackground/Canvas"
 
+const Game = () => {
 
-
-class Game extends Component {
-    state = {  }
-    render() { 
-        return (
-       <section className="Game"> 
-       <Canvas/>
-       <Board/>
-    </section>
-        );
-    }
+  
+    return ( <section className="Game"> 
+    <Canvas/>
+    <BoardHooks/>
+ </section> );
 }
  
 export default Game;

@@ -1,5 +1,3 @@
-import _ from 'lodash/shuffle';
-
 
 const cells = [
     {id: 1, name: "(child noises in the background!)", active: false},

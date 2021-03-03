@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {useState, useEffect} from 'react';
 import Cell from "./Cell";
 import {getCells} from "../services/Cells.js";
 import _, { update } from 'lodash' 
@@ -13,11 +14,14 @@ class Board extends Component {
 state = {
 matchedBlends: [],
 blendLength: 0,
+
 cells: [],
 activeCells: [],
 activeCellsId: []
 
 };
+
+
 
 componentDidMount() {
 
@@ -35,6 +39,8 @@ this.setState({cells: cellsCopy})
 
      
     }
+
+    
 
 
 
@@ -72,6 +78,10 @@ winningBlend.every(l =>
  activeCellsId.includes(l)));
 
 let matchedBlends = matched(activeCellsId, winningBlends);
+let status = 0;
+matchedBlends ? status = 1 : status = 0;
+this.setState({status: status})
+
 console.log(matchedBlends)
 this.setState({matchedBlends: matchedBlends })
 
@@ -89,7 +99,13 @@ return (
     <section className="board">
    
 <section className="bingoGame">
+<span style={{color: 'white', fontSize: 50, fontFamily: 'Trebuchet MS'}}> 
+Space Game {count >= 1 ? <span> {String.fromCodePoint( 127766)} </span> : <span> {String.fromCodePoint(127769)} </span> } 
+ </span>
+
+
 <section className="bingoResult"> 
+
  {/* result on success */}
  {matchedBlends.length >= 1 ? <Success count={count}/> : <section className="noBlends">
      <div style={{fontSize: 50, fontFamily: 'Trebuchet MS'}}> Space Call: 0 {String.fromCodePoint(127766)}</div>

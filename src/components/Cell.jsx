@@ -1,11 +1,17 @@
-import React, { Component } from 'react';
+import React, { useMemo, useEffect } from 'react';
+
 const Cell = props => {
     
     const {cell, HandleClick} = props;
+
+    useEffect(()=> {
+      console.log("child component is rendering")
+    }, [props.cell])
     
+
     return (
   <React.Fragment> 
-    
+   
  <button 
     
     className={cell.active ? "highlighted": "nonHighlighted"}
@@ -24,6 +30,6 @@ const Cell = props => {
       );
 }
  
-export default Cell;
+export default React.memo(Cell);
 
 

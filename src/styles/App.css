@@ -3,6 +3,7 @@
 }
 
 .Game {
+  color: white;
   display: -ms-grid;
   display: grid;
       grid-template-areas: "canvas-plus-board" "canvas-plus-board";
@@ -66,6 +67,9 @@
 }
 
 .bingoResult .matchedBlends {
+  -webkit-animation: everytime 1s forwards;
+          animation: everytime 1s forwards;
+  background-color: royalblue;
   -ms-grid-column-align: center;
       justify-self: center;
   -ms-grid-row-align: center;
@@ -82,7 +86,25 @@
       grid-template-areas: "textArea" "iconArea";
 }
 
-.bingoResult .matchedBlends .animatedText {
+@-webkit-keyframes everytime {
+  10% {
+    background-color: purple;
+  }
+  90% {
+    background-color: yellow;
+  }
+}
+
+@keyframes everytime {
+  10% {
+    background-color: purple;
+  }
+  90% {
+    background-color: yellow;
+  }
+}
+
+.bingoResult .animatedText {
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   grid-area: textArea;
@@ -91,7 +113,7 @@
   font-family: "Trebuchet MS";
 }
 
-.bingoResult .matchedBlends .action {
+.bingoResult .action {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: iconArea;
@@ -110,7 +132,7 @@
   width: 10vw;
 }
 
-.bingoResult .matchedBlends .action .confetti, .bingoResult .matchedBlends .action .confetti--purple {
+.bingoResult .action .confetti, .bingoResult .action .confetti--purple {
   z-index: -1;
   position: absolute;
   height: 50px;
@@ -127,7 +149,7 @@
   opacity: 0;
 }
 
-.bingoResult .matchedBlends .action .confetti {
+.bingoResult .action .confetti {
   top: 0;
   left: calc(50% - 5px);
   background-color: #ffea00;
@@ -137,14 +159,14 @@
           animation-delay: 0.35s;
 }
 
-.bingoResult .matchedBlends .action .confetti.two {
+.bingoResult .action .confetti.two {
   top: auto;
   bottom: 0;
   -webkit-animation-name: fly--down;
           animation-name: fly--down;
 }
 
-.bingoResult .matchedBlends .action .confetti.three, .bingoResult .matchedBlends .action .confetti.four {
+.bingoResult .action .confetti.three, .bingoResult .action .confetti.four {
   top: calc(50% - 5px);
   left: calc(50% - 25px);
   height: 10px;
@@ -153,12 +175,12 @@
           animation-name: fly--left;
 }
 
-.bingoResult .matchedBlends .action .confetti.four {
+.bingoResult .action .confetti.four {
   -webkit-animation-name: fly--right;
           animation-name: fly--right;
 }
 
-.bingoResult .matchedBlends .action .confetti--purple {
+.bingoResult .action .confetti--purple {
   background-color: #6200ea;
   -webkit-animation-name: fly--up--left;
           animation-name: fly--up--left;
@@ -170,7 +192,7 @@
   top: 20%;
 }
 
-.bingoResult .matchedBlends .action .confetti--purple.two {
+.bingoResult .action .confetti--purple.two {
   -webkit-animation-name: fly--up--right;
           animation-name: fly--up--right;
   left: auto;
@@ -179,7 +201,7 @@
           transform: rotate(45deg);
 }
 
-.bingoResult .matchedBlends .action .confetti--purple.three {
+.bingoResult .action .confetti--purple.three {
   top: auto;
   bottom: 20%;
   -webkit-transform: rotate(45deg);
@@ -188,7 +210,7 @@
           animation-name: fly--down--left;
 }
 
-.bingoResult .matchedBlends .action .confetti--purple.four {
+.bingoResult .action .confetti--purple.four {
   top: auto;
   bottom: 20%;
   left: auto;
@@ -199,29 +221,32 @@
           animation-name: fly--down--right;
 }
 
-.bingoResult .matchedBlends .trophy {
+.bingoResult .trophy {
   z-index: 1;
   background-color: #fff;
   height: 100%;
   width: 100%;
   border-radius: 100%;
-  -webkit-animation: trophy 0.5s 1 forwards;
-          animation: trophy 0.5s 1 forwards;
+  -webkit-animation: trophy ease-in 0.5s 1 forwards;
+          animation: trophy ease-in 0.5s 1 forwards;
 }
 
 @-webkit-keyframes trophy {
   0% {
     -webkit-transform: translateY(500px);
             transform: translateY(500px);
-    opacity: 0;
+    opacity: 1;
   }
   35% {
     opacity: 0;
   }
-  100% {
+  90% {
     -webkit-transform: translateY(0px);
             transform: translateY(0px);
     opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
@@ -229,15 +254,18 @@
   0% {
     -webkit-transform: translateY(500px);
             transform: translateY(500px);
-    opacity: 0;
+    opacity: 1;
   }
   35% {
     opacity: 0;
   }
-  100% {
+  90% {
     -webkit-transform: translateY(0px);
             transform: translateY(0px);
     opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
