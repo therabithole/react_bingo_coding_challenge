@@ -5,8 +5,10 @@ const Success = (props) => {
 
 
 	useEffect(()=> {
-		console.log(props, "success is running")
+		console.log(props, "success component useEffect / re-render")
 	}, [props.success] )
+
+	
 	const {count} = props;
 	return ( <section className="matchedBlends">
 	<div className="action">

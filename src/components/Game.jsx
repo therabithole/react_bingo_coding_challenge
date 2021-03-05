@@ -1,6 +1,7 @@
 import React from 'react';
-import BoardHooks from './BoardHooks';
+
 import Canvas from "./animatedBackground/Canvas"
+import BoardHooks from './BoardHooks';
 
 const Game = () => {
 

@@ -45,7 +45,7 @@ this.setState({cells: cellsCopy})
 
 
 HandleClick = (cell) => {
-    console.log("onclick", this.state.cells)
+  
 
 cell.active = !cell.active
 this.setState({ cell: cell});
@@ -105,7 +105,7 @@ Space Game {count >= 1 ? <span> {String.fromCodePoint( 127766)} </span> : <span>
 
 
 <section className="bingoResult"> 
-
+{console.log("result is rendeirng")}
  {/* result on success */}
  {matchedBlends.length >= 1 ? <Success count={count}/> : <section className="noBlends">
      <div style={{fontSize: 50, fontFamily: 'Trebuchet MS'}}> Space Call: 0 {String.fromCodePoint(127766)}</div>
@@ -113,6 +113,7 @@ Space Game {count >= 1 ? <span> {String.fromCodePoint( 127766)} </span> : <span>
 </section>
 
 <section className="bingoGrid">
+{console.log("grid is rendeirng")}
 {cells.map(cell => (
 <Cell cell={cell} HandleClick={this.HandleClick}/>
 ))}

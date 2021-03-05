@@ -3,7 +3,6 @@ import "../styles/App.css";
 import {getCells} from "../services/Cells.js";
 import _ from 'lodash';
 import Cell from "./Cell";
-import Success from './Success';
 
 
 function BoardHooks () {
@@ -12,11 +11,9 @@ function BoardHooks () {
     const [matchedBlends, setMatchedBlends] = useState([])
     const [activeCells, setActiveCells] = useState([])
     const [activeCellsId, setActiveCellsId] = useState([])
-    const [success, setSuccess ]  = useState(false)
+    const [success, setSuccess ]  = useState(0)
    
-   
-   // shuffle method
-
+   // shuffle 
     const runShuffle = useCallback(()  => {
         let ArrayMinusMid = getCells().filter(cell=> cell.id !== 13);
         let shuffleNames = _.shuffle(ArrayMinusMid.map(cell=> cell.name));
@@ -32,73 +29,43 @@ function BoardHooks () {
     }, [])
 
 
-    // Run shuffle 
+    // shuffle array on initial reload.
     useEffect(() => {
         runShuffle()
+
     }, [runShuffle])
 
 
     // outside
 
-    const ApplyBlend = (cell) => {
+    const thisHandleClick = (cell) => {
+        console.log(cell, "selected Cell")
+        cell.active = !cell.active;
+        setActiveCells(cells.filter((cell)=> cell.active == true));
+        console.log(activeCells, "all active/selected cells")
+        setActiveCellsId(activeCells.map(activeCells => activeCells.id));
+        console.log(activeCellsId, "all active/selected cells IDS")
         
 
+    }
+    // handle cell click
 
-            cell.active = !cell.active;
-            setActiveCells(cells.filter((cell)=> cell.active == true));
-            setActiveCellsId(activeCells.map(activeCells => activeCells.id));
-       
-    
-           let winningBlends = [[1, 2, 3 ,4, 5],
-           [6, 7, 8, 9, 10],
-           [11, 12,13, 14, 15],
-           [16, 17, 18, 19, 20],
-           [21, 22, 23, 24, 25],
-           [1, 6, 11, 16,21],
-           [2, 7, 12, 17, 22],
-           [3, 8, 13, 18, 23],
-           [4, 9, 14, 19, 24],
-           [5, 10, 15, 20, 25],
-           [1, 7, 13, 19, 25],
-           [5, 9, 13, 17, 21]];
-    
-    
-           let matched = (activeCellsId, winningBlends) =>
-           winningBlends.filter((winningBlend) =>
-           winningBlend.every(l =>
-            activeCellsId.includes(l)));
-            let matchedBlends = matched(activeCellsId, winningBlends);
-            setMatchedBlends(matchedBlends)
-            console.log(matchedBlends, "matched")
-        }
-        
+    useEffect(()=> {
 
-useEffect(()=> {})
- 
- /*
-function ApplySuccess() {
-useEffect(()=> {
-setSuccess(true); }, [success])   
-    
-}
+        console.log(activeCellsId, "checking effect stand-alone / activeCellsId")
+    })
 
- */
-    
-
-    const {length: count} = matchedBlends;
    
     return (
         <section className="board">
         <section className="bingoGame">  </section>
-        <section className="bingoResult">
-        <h1> matched blend{matchedBlends} </h1>
-         <Success/> : <h1> false </h1>  </section>
+        <section className="bingoResult"> Result {console.log("result is rendering")}</section>
         <section className="bingoGrid">
         {console.log("grid is rendeirng")}
         {cells.map(cell => (
      
         <Cell cell={cell} 
-        HandleClick={ApplyBlend}/>
+        HandleClick={thisHandleClick}/>
         ))}
         </section>
 

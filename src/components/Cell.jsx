@@ -5,7 +5,7 @@ const Cell = props => {
     const {cell, HandleClick} = props;
 
     useEffect(()=> {
-      console.log("child component is rendering")
+      console.log("cell component re-rendered / useEffect")
     }, [props.cell])
     
 
