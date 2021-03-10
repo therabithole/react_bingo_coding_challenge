@@ -5,13 +5,17 @@ import _ from 'lodash';
 import Cell from "./Cell";
 
 
+
 function BoardHooks () {
 
     const [cells, setCells ] = useState([])
-    const [matchedBlends, setMatchedBlends] = useState([])
     const [activeCells, setActiveCells] = useState([])
     const [activeCellsId, setActiveCellsId] = useState([])
+    const [matchedBlends, setMatchedBlends] = useState([])
     const [success, setSuccess ]  = useState(0)
+ 
+
+    
    
    // shuffle 
     const runShuffle = useCallback(()  => {
@@ -38,21 +42,50 @@ function BoardHooks () {
 
     // outside
 
-    const thisHandleClick = (cell) => {
-        console.log(cell, "selected Cell")
+    const runMatch = useCallback((cell) => {
+       
+       
+      //  console.log(cell, "selected Cell")
         cell.active = !cell.active;
         setActiveCells(cells.filter((cell)=> cell.active == true));
-        console.log(activeCells, "all active/selected cells")
+      //  console.log(activeCells, "all active/selected cells")
         setActiveCellsId(activeCells.map(activeCells => activeCells.id));
-        console.log(activeCellsId, "all active/selected cells IDS")
+      //  console.log(activeCellsId, "all active/selected cells IDS")
+     
+
+        let winningBlends = [
+            [1, 2, 3 ,4, 5],
+            [6, 7, 8, 9, 10],
+            [11, 12,13, 14, 15],
+            [16, 17, 18, 19, 20],
+            [21, 22, 23, 24, 25],
+            [1, 6, 11, 16,21],
+            [2, 7, 12, 17, 22],
+            [3, 8, 13, 18, 23],
+            [4, 9, 14, 19, 24],
+            [5, 10, 15, 20, 25],
+            [1, 7, 13, 19, 25],
+            [5, 9, 13, 17, 21]];
+            
+            
+            let matchFormula = (activeCellsId, winningBlends) =>
+            winningBlends.filter((winningBlend) =>
+            winningBlend.every(l =>
+             activeCellsId.includes(l)));
+            
+            let result = matchFormula(activeCellsId, winningBlends);
+            console.log("result", result)
+            setMatchedBlends(result)
+           
         
 
-    }
+    })
     // handle cell click
 
     useEffect(()=> {
 
-        console.log(activeCellsId, "checking effect stand-alone / activeCellsId")
+      //  console.log(activeCellsId, "checking effect stand-alone / activeCellsId")
+      console.log(matchedBlends, "match")
     })
 
    
@@ -65,7 +98,7 @@ function BoardHooks () {
         {cells.map(cell => (
      
         <Cell cell={cell} 
-        HandleClick={thisHandleClick}/>
+        HandleClick={runMatch}/>
         ))}
         </section>
 
